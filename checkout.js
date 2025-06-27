@@ -1,6 +1,11 @@
-// checkout.js – mit Formular, Validierung und API-Anbindung
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   updateCartCount();
+
+  // Dynamisch laden, um auf products[] zugreifen zu können
+  const module = await import('./data.js');
+  const products = module.products;
+  const productsMap = new Map(products.map(p => [p.id, p]));
+
   const cart = getCart();
   const container = document.getElementById('cart-page');
 
@@ -18,7 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const tbody = table.querySelector('tbody');
 
   cart.forEach(item => {
-    const p = products.find(prod => prod.id === item.id);
+    const p = productsMap.get(item.id);
+    if (!p) return;
+
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${p.name}</td>
@@ -68,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Bestellung erfolgreich: ' + result.message);
       localStorage.removeItem('cart');
       updateCartCount();
-      container.innerHTML = `<p>${translations?.de?.checkoutSuccess || 'Deine Bestellung wurde erfolgreich übermittelt.'}</p>`;
+      container.innerHTML = `<p>Deine Bestellung wurde erfolgreich übermittelt.</p>`;
     } catch (err) {
       alert('Fehler bei der Bestellung. Bitte erneut versuchen.');
     }

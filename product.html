@@ -1,36 +1,61 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produktansicht – Dieci Pizza</title>
-  <link rel="stylesheet" href="styles.css">
-  <button id="theme-toggle" class="btn btn--small">🌙</button>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizza Vorschau – Dieci Pizza</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="data.js" defer></script>
+  <script src="product.js" defer></script>
+  <script src="cart.js" defer></script>
+  <script src="checkout.js" defer></script>
 </head>
 <body>
   <header class="header">
     <div class="container header__container">
-      <a href="mainpage.html" class="logo">🍕 Dieci Pizza</a>
-      <nav class="nav">
+      <a href="mainpage.html" class="logo">Dieci Pizza</a>
+      <nav>
         <a href="mainpage.html" class="nav__link">Home</a>
-        <a href="cart.html" class="nav__link">Warenkorb (<span id="cart-count">0</span>)</a>
       </nav>
     </div>
   </header>
 
-  <main class="main container">
-    <section id="product-detail" class="card"></section>
+  <main class="container">
+    <section id="product-detail">
+      <!-- Produktdetails werden dynamisch mit JS eingefügt -->
+    </section>
+
+    <section id="inline-cart-checkout" class="cart-section">
+      <h2>🛒 Dein Warenkorb</h2>
+      <div id="cart-items"></div>
+      <div id="cart-total"></div>
+      <button id="checkout-button" class="btn btn--primary">Bestellung abschließen</button>
+
+      <form id="contact-form" class="checkout-form">
+        <h3>Kontaktdaten</h3>
+        <label for="name">
+          Name:
+          <input type="text" id="name" name="name" required />
+        </label>
+
+        <label for="email">
+          E-Mail:
+          <input type="email" id="email" name="email" required />
+        </label>
+
+        <label for="address">
+          Adresse:
+          <textarea id="address" name="address" required></textarea>
+        </label>
+
+        <button type="submit" class="btn btn--primary">Absenden</button>
+      </form>
+    </section>
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Dieci Pizza. Alle Rechte vorbehalten.</p>
-      <p><a href="#">Datenschutz</a> | <a href="#">AGB</a> | <a href="#">Impressum</a></p>
-    </div>
+    <p>&copy; 2025 La Corte della Pizza. Alle Rechte vorbehalten.</p>
+    <a href="#">Datenschutz</a> | <a href="#">AGB</a> | <a href="#">Impressum</a>
   </footer>
-
-  <script src="data.js"></script>
-  <script src="cart.js"></script>
-  <script src="product.js"></script>
 </body>
 </html>

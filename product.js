@@ -1,5 +1,3 @@
-// product.js – überarbeitet mit modernem Routing & Anzeige
-
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
 
@@ -26,7 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('add-to-cart').addEventListener('click', () => {
     const qty = parseInt(document.getElementById('qty').value);
-    addToCart(product.id, qty);
+    addToCart({ id: product.id, name: product.name, price: product.price, qty });
+    updateCartCount();
+    renderCart();
     alert(`${qty}x ${product.name} zum Warenkorb hinzugefügt.`);
   });
 });
